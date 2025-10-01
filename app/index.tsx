@@ -1,12 +1,12 @@
-import IconButtons from '@/components/IconButtons'; // Asegúrate de que la ruta sea correcta
+import Login from '@/components/auth/Login';
+import "@/global.css";
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
 
 export default function Index() {
   const [contador, setContador] = useState(0);
 
   return (
-    <View
+    /*<View
       style={{
         flex: 1,
         justifyContent: 'center',
@@ -21,6 +21,7 @@ export default function Index() {
         onIncrease={() => setContador(contador + 1)}
         onDecrease={() => setContador(contador - 1)}
       />
-    </View>
+    </View>*/
+    <Login/>
   );
 }
