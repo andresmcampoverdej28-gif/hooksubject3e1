@@ -2,28 +2,14 @@ import "@/global.css";
 import { Ionicons } from '@expo/vector-icons';
 import { selectionAsync } from 'expo-haptics';
 import { router } from 'expo-router';
-import React, { useEffect, useState } from 'react';
-import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
-
-type status = "Activo" | "Registrando" | "Logueando" | "Esperando";
+import React, { useState } from 'react';
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function Index() {
-  const [estUsu, setEstUsu] = useState<status>("Esperando");
-  const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
-  useEffect(() => {
-    if(estUsu=="Esperando"){
-      Alert.alert("Bienvenido, espero tu respuesta");
-    }
-    if (estUsu=="Registrando"){
-      Alert.alert("Estamos registrando tu cuenta");
-    }
-    return () => {}
-  }, [estUsu])
-
   return (
-    <ScrollView className="flex-1 bg-gradient-to-b from-purple-900 via-purple-800 to-indigo-900">
+    <ScrollView className="flex-1 bg-gradient-to-b from-purple-900 via-purple-800 to-indigo-900 bg-black">
       {/* Decoraciones geométricas superiores */}
       <View className="absolute top-0 right-0 w-96 h-96 rounded-full bg-yellow-400 opacity-10 -translate-y-1/2 translate-x-1/2" />
       <View className="absolute top-20 left-0 w-72 h-72 rounded-full bg-pink-400 opacity-10 -translate-x-1/2" />
@@ -41,7 +27,7 @@ export default function Index() {
           </View>
         </View>
         <Text className="text-white text-center text-sm font-bold tracking-widest">
-          {isLogin ? 'INGRESA A LA BATALLA' : 'CREA TU BRAWLER'}
+          INGRESA A LA BATALLA
         </Text>
       </View>
 
@@ -85,44 +71,22 @@ export default function Index() {
           </View>
         </View>
 
-        {/* Input Email - Solo visible en registro */}
-        {!isLogin && (
-          <View className="mb-6">
-            <Text className="text-yellow-300 font-black text-sm mb-3 tracking-widest">
-              EMAIL
-            </Text>
-            <View className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl px-4 py-4 flex-row items-center border-2 border-yellow-400">
-              <Ionicons name="mail-outline" size={20} color="#FBBF24" />
-              <TextInput
-                className="flex-1 text-white ml-3 text-base font-bold"
-                placeholder="TU@EMAIL.COM"
-                placeholderTextColor="#9333EA"
-                keyboardType="email-address"
-              />
-            </View>
-          </View>
-        )}
-
-        {/* Forgot Password - Solo en login */}
-        {isLogin && (
-          <TouchableOpacity className="mb-6">
-            <Text className="text-yellow-300 text-sm font-black text-right tracking-widest">
-              ¿OLVIDASTE?
-            </Text>
-          </TouchableOpacity>
-        )}
+        {/* Forgot Password */}
+        <TouchableOpacity className="mb-6">
+          <Text className="text-yellow-300 text-sm font-black text-right tracking-widest">
+            ¿OLVIDASTE?
+          </Text>
+        </TouchableOpacity>
 
         {/* Botón Principal */}
         <TouchableOpacity 
-          className="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl py-4 mb-4 border-4 border-yellow-300 shadow-2xl active:opacity-75"
           onPress={() => {
+            router.push("/DashboardScreen");
             selectionAsync();
-            setEstUsu(isLogin ? "Logueando" : "Registrando");
           }}
+          className="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl py-4 mb-4 border-4 border-yellow-300 shadow-2xl active:opacity-75"
         >
-          <Text className="text-purple-900 text-center font-black text-lg tracking-widest">
-            {isLogin ? '¡BATALLA!' : '¡ÚNETE!'}
-          </Text>
+          <Text className="text-purple-600 text-center font-black text-lg tracking-widest">BATALLA</Text>
         </TouchableOpacity>
 
         {/* Divisor estilo Brawl Stars */}
@@ -146,26 +110,12 @@ export default function Index() {
         {/* Toggle Login/Register */}
         <View className="flex-row justify-center mt-8 bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl py-3 border-2 border-yellow-400">
           <Text className="text-yellow-300 text-sm font-black">
-            {isLogin ? '¿SIN CUENTA? ' : '¿YA TIENES? '}
+            ¿SIN CUENTA?{' '}
           </Text>
-          <TouchableOpacity onPress={() => setIsLogin(!isLogin)}>
-            <Text className="text-orange-400 font-black text-sm tracking-widest">
-              {isLogin ? 'REGISTRATE' : 'INGRESA'}
-            </Text>
-          </TouchableOpacity>
+          <Text className="text-orange-400 font-black text-sm tracking-widest">
+            REGISTRATE
+          </Text>
         </View>
-
-        {/* Botón Dashboard */}
-        <TouchableOpacity 
-          onPress={() => {
-            router.push("/DashboardScreen");
-            selectionAsync();
-          }}
-          className="bg-gradient-to-r from-cyan-400 to-blue-400 rounded-3xl py-4 mt-6 border-4 border-cyan-300 flex-row items-center justify-center shadow-lg"
-        >
-          <Ionicons name="home-outline" size={22} color="#1e293b" />
-          <Text className="text-slate-900 font-black ml-2 tracking-widest">INICIO</Text>
-        </TouchableOpacity>
       </View>
 
       {/* Decoraciones geométricas inferiores */}
