@@ -5,12 +5,13 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-interface LoginProps {
+interface RegisterProps {
   setIsLogin: (value: boolean) => void;
 }
 
-export default function Login({ setIsLogin }: LoginProps) {
+export default function Register({ setIsLogin }: RegisterProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
     <ScrollView className="flex-1 bg-gradient-to-b from-purple-900 via-purple-800 to-indigo-900">
@@ -31,7 +32,7 @@ export default function Login({ setIsLogin }: LoginProps) {
           </View>
         </View>
         <Text className="text-white text-center text-sm font-bold tracking-widest">
-          INGRESA A LA BATALLA
+          CREA TU BRAWLER
         </Text>
       </View>
 
@@ -48,6 +49,22 @@ export default function Login({ setIsLogin }: LoginProps) {
               className="flex-1 text-white ml-3 text-base font-bold"
               placeholder="TU NOMBRE"
               placeholderTextColor="#9333EA"
+            />
+          </View>
+        </View>
+
+        {/* Input Email */}
+        <View className="mb-6">
+          <Text className="text-yellow-300 font-black text-sm mb-3 tracking-widest">
+            EMAIL
+          </Text>
+          <View className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl px-4 py-4 flex-row items-center border-2 border-yellow-400">
+            <Ionicons name="mail-outline" size={20} color="#FBBF24" />
+            <TextInput
+              className="flex-1 text-white ml-3 text-base font-bold"
+              placeholder="TU@EMAIL.COM"
+              placeholderTextColor="#9333EA"
+              keyboardType="email-address"
             />
           </View>
         </View>
@@ -75,19 +92,35 @@ export default function Login({ setIsLogin }: LoginProps) {
           </View>
         </View>
 
-        {/* Forgot Password */}
-        <TouchableOpacity className="mb-6">
-          <Text className="text-yellow-300 text-sm font-black text-right tracking-widest">
-            ¿OLVIDASTE?
+        {/* Input Confirmar Password */}
+        <View className="mb-6">
+          <Text className="text-yellow-300 font-black text-sm mb-3 tracking-widest">
+            CONFIRMAR CONTRASEÑA
           </Text>
-        </TouchableOpacity>
+          <View className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl px-4 py-4 flex-row items-center border-2 border-yellow-400">
+            <Ionicons name="lock-closed-outline" size={20} color="#FBBF24" />
+            <TextInput
+              className="flex-1 text-white ml-3 text-base font-bold"
+              placeholder="••••••••"
+              placeholderTextColor="#9333EA"
+              secureTextEntry={!showConfirmPassword}
+            />
+            <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+              <Ionicons 
+                name={showConfirmPassword ? "eye-outline" : "eye-off-outline"} 
+                size={20} 
+                color="#FBBF24" 
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
 
         {/* Botón Principal */}
         <TouchableOpacity 
           className="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl py-4 mb-4 border-4 border-yellow-300 shadow-2xl active:opacity-75"
         >
           <Text className="text-purple-900 text-center font-black text-lg tracking-widest">
-            ¡BATALLA!
+            ¡ÚNETE!
           </Text>
         </TouchableOpacity>
 
@@ -112,13 +145,13 @@ export default function Login({ setIsLogin }: LoginProps) {
         {/* Toggle Login/Register */}
         <TouchableOpacity 
           className="flex-row justify-center mt-8 bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl py-3 border-2 border-yellow-400"
-          onPress={() => setIsLogin(false)}
+          onPress={() => setIsLogin(true)}
         >
           <Text className="text-yellow-300 text-sm font-black">
-            ¿SIN CUENTA?{' '}
+            ¿YA TIENES CUENTA?{' '}
           </Text>
           <Text className="text-orange-400 font-black text-sm tracking-widest">
-            REGISTRATE
+            INGRESA
           </Text>
         </TouchableOpacity>
 
