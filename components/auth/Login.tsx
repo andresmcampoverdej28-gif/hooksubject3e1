@@ -13,7 +13,7 @@ export default function Login({ setIsLogin }: LoginProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <ScrollView className="flex-1 bg-gradient-to-b from-purple-900 via-purple-800 to-indigo-900">
+    <ScrollView className="flex-1 bg-gradient-to-b from-purple-900 via-purple-800 to-indigo-900 bg-black">
       {/* Decoraciones geométricas superiores */}
       <View className="absolute top-0 right-0 w-96 h-96 rounded-full bg-yellow-400 opacity-10 -translate-y-1/2 translate-x-1/2" />
       <View className="absolute top-20 left-0 w-72 h-72 rounded-full bg-pink-400 opacity-10 -translate-x-1/2" />
@@ -84,6 +84,10 @@ export default function Login({ setIsLogin }: LoginProps) {
 
         {/* Botón Principal */}
         <TouchableOpacity 
+           onPress={() => {
+            router.push("/DashboardScreen");
+            selectionAsync();
+          }}
           className="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl py-4 mb-4 border-4 border-yellow-300 shadow-2xl active:opacity-75"
         >
           <Text className="text-purple-900 text-center font-black text-lg tracking-widest">
@@ -120,18 +124,6 @@ export default function Login({ setIsLogin }: LoginProps) {
           <Text className="text-orange-400 font-black text-sm tracking-widest">
             REGISTRATE
           </Text>
-        </TouchableOpacity>
-
-        {/* Botón Dashboard */}
-        <TouchableOpacity 
-          onPress={() => {
-            router.push("/DashboardScreen");
-            selectionAsync();
-          }}
-          className="bg-gradient-to-r from-cyan-400 to-blue-400 rounded-3xl py-4 mt-6 border-4 border-cyan-300 flex-row items-center justify-center shadow-lg"
-        >
-          <Ionicons name="home-outline" size={22} color="#1e293b" />
-          <Text className="text-slate-900 font-black ml-2 tracking-widest">INICIO</Text>
         </TouchableOpacity>
       </View>
 
