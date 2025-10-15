@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { selectionAsync } from 'expo-haptics';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Linking, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 interface LoginProps {
   setIsLogin: (value: boolean) => void;
@@ -11,6 +11,14 @@ interface LoginProps {
 
 export default function Login({ setIsLogin }: LoginProps) {
   const [showPassword, setShowPassword] = useState(false);
+
+  const openURL = async (url: string) => {
+    try {
+      await Linking.openURL(url);
+    } catch (error) {
+      console.error('No se pudo abrir el link:', error);
+    }
+  };
 
   return (
     <ScrollView className="flex-1 bg-gradient-to-b from-purple-900 via-purple-800 to-indigo-900 bg-black">
@@ -85,7 +93,7 @@ export default function Login({ setIsLogin }: LoginProps) {
         {/* Botón Principal */}
         <TouchableOpacity 
            onPress={() => {
-            router.push("/DashboardScreen");
+            router.push("./DashboardScreen");
             selectionAsync();
           }}
           className="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl py-4 mb-4 border-4 border-yellow-300 shadow-2xl active:opacity-75"
@@ -103,14 +111,28 @@ export default function Login({ setIsLogin }: LoginProps) {
         </View>
 
         {/* Botones Sociales */}
-        <TouchableOpacity className="bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl py-3 mb-3 border-2 border-pink-300 flex-row items-center justify-center">
-          <Ionicons name="logo-google" size={20} color="white" />
-          <Text className="text-white ml-2 font-black tracking-widest">GOOGLE</Text>
+        <TouchableOpacity 
+          className="bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl py-3 mb-3 border-2 border-pink-300 flex-row items-center justify-center"
+          onPress={() => openURL('https://www.youtube.com/@XimenchBS')}
+        >
+          <Ionicons name="logo-youtube" size={20} color="white" />
+          <Text className="text-white ml-2 font-black tracking-widest">YOUTUBE</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl py-3 border-2 border-blue-300 flex-row items-center justify-center">
-          <Ionicons name="logo-facebook" size={20} color="white" />
-          <Text className="text-white ml-2 font-black tracking-widest">FACEBOOK</Text>
+        <TouchableOpacity 
+          className="bg-gradient-to-r from-cyan-400 to-pink-500 rounded-2xl py-3 mb-3 border-2 border-cyan-300 flex-row items-center justify-center"
+          onPress={() => openURL('https://www.tiktok.com/@ximench_bstars')}
+        >
+          <Ionicons name="logo-tiktok" size={20} color="white" />
+          <Text className="text-white ml-2 font-black tracking-widest">TIKTOK</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl py-3 border-2 border-blue-300 flex-row items-center justify-center"
+          onPress={() => openURL('https://www.instagram.com/ximench_bs')}
+        >
+          <Ionicons name="logo-instagram" size={20} color="white" />
+          <Text className="text-white ml-2 font-black tracking-widest">INSTAGRAM</Text>
         </TouchableOpacity>
 
         {/* Toggle Login/Register */}
