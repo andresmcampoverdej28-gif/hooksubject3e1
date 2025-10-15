@@ -27,9 +27,6 @@ const DashboardScreen = () => {
             <TouchableOpacity className="w-10 h-10 rounded-full bg-purple-700 border-2 border-yellow-400 items-center justify-center">
               <Ionicons name="search-outline" size={20} color="#FBBF24" />
             </TouchableOpacity>
-            <TouchableOpacity className="w-10 h-10 rounded-full bg-purple-700 border-2 border-yellow-400 items-center justify-center">
-              <Ionicons name="settings-outline" size={20} color="#FBBF24" />
-            </TouchableOpacity>
           </View>
         </View>
 

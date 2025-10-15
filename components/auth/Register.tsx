@@ -1,9 +1,9 @@
 import "@/global.css";
 import { Ionicons } from '@expo/vector-icons';
 import { selectionAsync } from 'expo-haptics';
-import { router } from 'expo-router';
+import { replace } from "expo-router/build/global-state/routing";
 import React, { useState } from 'react';
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Linking, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 interface RegisterProps {
   setIsLogin: (value: boolean) => void;
@@ -12,6 +12,14 @@ interface RegisterProps {
 export default function Register({ setIsLogin }: RegisterProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const openURL = async (url: string) => {
+    try {
+      await Linking.openURL(url);
+    } catch (error) {
+      console.error('No se pudo abrir el link:', error);
+    }
+  };
 
   return (
     <ScrollView className="flex-1 bg-gradient-to-b from-purple-900 via-purple-800 to-indigo-900 bg-black">
@@ -118,7 +126,7 @@ export default function Register({ setIsLogin }: RegisterProps) {
         {/* Botón Principal */}
         <TouchableOpacity 
           onPress={() => {
-            router.push("/DashboardScreen");
+            replace("/DashboardScreen");
             selectionAsync();
           }}
           className="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl py-4 mb-4 border-4 border-yellow-300 shadow-2xl active:opacity-75"
@@ -131,19 +139,33 @@ export default function Register({ setIsLogin }: RegisterProps) {
         {/* Divisor estilo Brawl Stars */}
         <View className="flex-row items-center mb-6 mt-8">
           <View className="flex-1 h-1 bg-gradient-to-r from-transparent to-yellow-400" />
-          <Text className="text-yellow-300 px-3 text-xs font-black tracking-widest">O</Text>
+          <Text className="text-yellow-300 px-3 text-xs font-black tracking-widest">¡Sigue a XimenchOf!</Text>
           <View className="flex-1 h-1 bg-gradient-to-l from-transparent to-yellow-400" />
         </View>
 
         {/* Botones Sociales */}
-        <TouchableOpacity className="bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl py-3 mb-3 border-2 border-pink-300 flex-row items-center justify-center">
-          <Ionicons name="logo-google" size={20} color="white" />
-          <Text className="text-white ml-2 font-black tracking-widest">GOOGLE</Text>
+        <TouchableOpacity 
+          className="bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl py-3 mb-3 border-2 border-pink-300 flex-row items-center justify-center"
+          onPress={() => openURL('https://www.youtube.com/@XimenchBS')}
+        >
+          <Ionicons name="logo-youtube" size={20} color="white" />
+          <Text className="text-white ml-2 font-black tracking-widest">YOUTUBE</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl py-3 border-2 border-blue-300 flex-row items-center justify-center">
-          <Ionicons name="logo-facebook" size={20} color="white" />
-          <Text className="text-white ml-2 font-black tracking-widest">FACEBOOK</Text>
+        <TouchableOpacity 
+          className="bg-gradient-to-r from-cyan-400 to-pink-500 rounded-2xl py-3 mb-3 border-2 border-cyan-300 flex-row items-center justify-center"
+          onPress={() => openURL('https://www.tiktok.com/@ximench_bstars')}
+        >
+          <Ionicons name="logo-tiktok" size={20} color="white" />
+          <Text className="text-white ml-2 font-black tracking-widest">TIKTOK</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl py-3 border-2 border-blue-300 flex-row items-center justify-center"
+          onPress={() => openURL('https://www.instagram.com/ximench_bs')}
+        >
+          <Ionicons name="logo-instagram" size={20} color="white" />
+          <Text className="text-white ml-2 font-black tracking-widest">INSTAGRAM</Text>
         </TouchableOpacity>
 
         {/* Toggle Login/Register */}

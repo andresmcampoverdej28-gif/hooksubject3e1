@@ -25,7 +25,7 @@ const Mainlayout = () => {
             }}
         >
             <Tabs.Screen 
-                name="./DashboardScreen" 
+                name="DashboardScreen" 
                 options={{
                     title: "YOUR MUSIC",
                     tabBarIcon: () => (
@@ -39,7 +39,7 @@ const Mainlayout = () => {
             />
             
             <Tabs.Screen 
-                name="./NowPlaying" 
+                name="NowPlaying" 
                 options={{
                     title: "NOW PLAYING",
                     tabBarIcon: () => (
@@ -53,7 +53,7 @@ const Mainlayout = () => {
             />
 
             <Tabs.Screen 
-                name="./SettingScreen" 
+                name="SettingScreen" 
                 options={{
                     title: "SETTINGS",
                     tabBarIcon: () => (

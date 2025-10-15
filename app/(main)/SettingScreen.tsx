@@ -2,6 +2,7 @@ import "@/global.css";
 import { Ionicons } from '@expo/vector-icons';
 import { selectionAsync } from 'expo-haptics';
 import { router } from 'expo-router';
+import { replace } from "expo-router/build/global-state/routing";
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
@@ -9,6 +10,16 @@ const SettingScreen = () => {
   const handleLogout = () => {
     selectionAsync();
     router.replace('/');
+  };
+
+  const handleNotFound = () => {
+    selectionAsync();
+    replace('/+not-found');
+  };
+
+  const handleProfile = () => {
+    selectionAsync();
+    router.push('../Profile/Profile');
   };
 
   return (
@@ -25,7 +36,9 @@ const SettingScreen = () => {
             PERFIL
           </Text>
           
-          <TouchableOpacity className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 mb-3 border-2 border-purple-600 flex-row items-center justify-between">
+          <TouchableOpacity 
+            onPress={handleProfile}
+            className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 mb-3 border-2 border-purple-600 flex-row items-center justify-between">
             <View className="flex-row items-center">
               <View className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 items-center justify-center mr-4">
                 <Ionicons name="person" size={24} color="#6B21A8" />
@@ -38,7 +51,10 @@ const SettingScreen = () => {
             <Ionicons name="chevron-forward" size={20} color="#FBBF24" />
           </TouchableOpacity>
 
-          <TouchableOpacity className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 border-2 border-purple-600 flex-row items-center justify-between">
+          <TouchableOpacity 
+            onPress={handleNotFound}
+            className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 border-2 border-purple-600 flex-row items-center justify-between"
+          >
             <View className="flex-row items-center">
               <View className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 items-center justify-center mr-4">
                 <Ionicons name="shield-checkmark" size={24} color="white" />
@@ -58,7 +74,10 @@ const SettingScreen = () => {
             APLICACIÓN
           </Text>
           
-          <TouchableOpacity className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 mb-3 border-2 border-purple-600 flex-row items-center justify-between">
+          <TouchableOpacity 
+            onPress={handleNotFound}
+            className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 mb-3 border-2 border-purple-600 flex-row items-center justify-between"
+          >
             <View className="flex-row items-center">
               <View className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 items-center justify-center mr-4">
                 <Ionicons name="notifications" size={24} color="white" />
@@ -71,7 +90,10 @@ const SettingScreen = () => {
             <Ionicons name="chevron-forward" size={20} color="#FBBF24" />
           </TouchableOpacity>
 
-          <TouchableOpacity className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 mb-3 border-2 border-purple-600 flex-row items-center justify-between">
+          <TouchableOpacity 
+            onPress={handleNotFound}
+            className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 mb-3 border-2 border-purple-600 flex-row items-center justify-between"
+          >
             <View className="flex-row items-center">
               <View className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 items-center justify-center mr-4">
                 <Ionicons name="musical-note" size={24} color="white" />
@@ -84,7 +106,10 @@ const SettingScreen = () => {
             <Ionicons name="chevron-forward" size={20} color="#FBBF24" />
           </TouchableOpacity>
 
-          <TouchableOpacity className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 border-2 border-purple-600 flex-row items-center justify-between">
+          <TouchableOpacity 
+            onPress={handleNotFound}
+            className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 border-2 border-purple-600 flex-row items-center justify-between"
+          >
             <View className="flex-row items-center">
               <View className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 items-center justify-center mr-4">
                 <Ionicons name="download" size={24} color="white" />
@@ -104,7 +129,10 @@ const SettingScreen = () => {
             SOPORTE
           </Text>
           
-          <TouchableOpacity className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 mb-3 border-2 border-purple-600 flex-row items-center justify-between">
+          <TouchableOpacity 
+            onPress={handleNotFound}
+            className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 mb-3 border-2 border-purple-600 flex-row items-center justify-between"
+          >
             <View className="flex-row items-center">
               <View className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 items-center justify-center mr-4">
                 <Ionicons name="help-circle" size={24} color="#6B21A8" />
@@ -117,7 +145,10 @@ const SettingScreen = () => {
             <Ionicons name="chevron-forward" size={20} color="#FBBF24" />
           </TouchableOpacity>
 
-          <TouchableOpacity className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 border-2 border-purple-600 flex-row items-center justify-between">
+          <TouchableOpacity 
+            onPress={handleNotFound}
+            className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl p-4 border-2 border-purple-600 flex-row items-center justify-between"
+          >
             <View className="flex-row items-center">
               <View className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 items-center justify-center mr-4">
                 <Ionicons name="information-circle" size={24} color="white" />

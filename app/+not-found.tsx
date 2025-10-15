@@ -31,7 +31,7 @@ export default function NotFoundScreen() {
 
         {/* Botón de regreso */}
         <TouchableOpacity 
-          onPress={() => router.replace('/')}
+          onPress={() => router.replace('../(main)/DashboardScreen')}
           className="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl py-4 px-8 border-4 border-yellow-300 shadow-2xl active:opacity-75 flex-row items-center"
         >
           <Ionicons name="home" size={24} color="#6B21A8" />

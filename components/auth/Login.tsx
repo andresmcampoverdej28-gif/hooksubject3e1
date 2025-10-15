@@ -1,7 +1,7 @@
 import "@/global.css";
 import { Ionicons } from '@expo/vector-icons';
 import { selectionAsync } from 'expo-haptics';
-import { router } from 'expo-router';
+import { replace } from "expo-router/build/global-state/routing";
 import React, { useState } from 'react';
 import { Linking, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
@@ -93,7 +93,7 @@ export default function Login({ setIsLogin }: LoginProps) {
         {/* Botón Principal */}
         <TouchableOpacity 
            onPress={() => {
-            router.push("./DashboardScreen");
+            replace("/DashboardScreen");
             selectionAsync();
           }}
           className="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl py-4 mb-4 border-4 border-yellow-300 shadow-2xl active:opacity-75"
@@ -106,7 +106,7 @@ export default function Login({ setIsLogin }: LoginProps) {
         {/* Divisor estilo Brawl Stars */}
         <View className="flex-row items-center mb-6 mt-8">
           <View className="flex-1 h-1 bg-gradient-to-r from-transparent to-yellow-400" />
-          <Text className="text-yellow-300 px-3 text-xs font-black tracking-widest">O</Text>
+          <Text className="text-yellow-300 px-3 text-xs font-black tracking-widest">¡Sigue a XimenchOf!</Text>
           <View className="flex-1 h-1 bg-gradient-to-l from-transparent to-yellow-400" />
         </View>
 
