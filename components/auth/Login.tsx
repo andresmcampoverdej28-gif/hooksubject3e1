@@ -1,4 +1,5 @@
 import "@/global.css";
+import EmailInput from '@/lib/components/EmailInput';
 import { Ionicons } from '@expo/vector-icons';
 import { selectionAsync } from 'expo-haptics';
 import { replace } from "expo-router/build/global-state/routing";
@@ -11,12 +12,25 @@ interface LoginProps {
 
 export default function Login({ setIsLogin }: LoginProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [forceValidation, setForceValidation] = useState(false);
 
   const openURL = async (url: string) => {
     try {
       await Linking.openURL(url);
     } catch (error) {
       console.error('No se pudo abrir el link:', error);
+    }
+  };
+
+  const handleLogin = () => {
+    setForceValidation(true);
+    
+    if (isEmailValid && password.length > 0) {
+      replace("/DashboardScreen");
+      selectionAsync();
     }
   };
 
@@ -45,19 +59,22 @@ export default function Login({ setIsLogin }: LoginProps) {
 
       {/* Contenedor principal */}
       <View className="px-6 py-8 relative z-10">
-        {/* Input Username */}
+        {/* Input Email con validación */}
         <View className="mb-6">
           <Text className="text-yellow-300 font-black text-sm mb-3 tracking-widest">
-            USUARIO
+            CORREO ELECTRÓNICO
           </Text>
-          <View className="bg-gradient-to-r from-purple-700 to-indigo-700 rounded-2xl px-4 py-4 flex-row items-center border-2 border-yellow-400">
-            <Ionicons name="person-outline" size={20} color="#FBBF24" />
-            <TextInput
-              className="flex-1 text-white ml-3 text-base font-bold"
-              placeholder="TU NOMBRE"
-              placeholderTextColor="#9333EA"
-            />
-          </View>
+          <EmailInput
+            value={email}
+            onChangeText={setEmail}
+            label=""
+            placeholder="TU@CORREO.COM"
+            validateOnBlur={forceValidation ? true : true}
+            validateOnChange={forceValidation}
+            onValidationChange={(isValid) => setIsEmailValid(isValid)}
+            className="bg-gradient-to-r from-purple-700 to-indigo-700 border-2 border-yellow-400 text-white font-bold rounded-2xl"
+            placeholderTextColor="#9333EA"
+          />
         </View>
 
         {/* Input Password */}
@@ -72,6 +89,8 @@ export default function Login({ setIsLogin }: LoginProps) {
               placeholder="••••••••"
               placeholderTextColor="#9333EA"
               secureTextEntry={!showPassword}
+              value={password}
+              onChangeText={setPassword}
             />
             <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
               <Ionicons 
@@ -92,10 +111,7 @@ export default function Login({ setIsLogin }: LoginProps) {
 
         {/* Botón Principal */}
         <TouchableOpacity 
-           onPress={() => {
-            replace("/DashboardScreen");
-            selectionAsync();
-          }}
+          onPress={handleLogin}
           className="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl py-4 mb-4 border-4 border-yellow-300 shadow-2xl active:opacity-75"
         >
           <Text className="text-purple-900 text-center font-black text-lg tracking-widest">
