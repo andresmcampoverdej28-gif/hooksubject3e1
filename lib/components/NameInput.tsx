@@ -1,9 +1,9 @@
-import { emailFieldSchema } from '@/lib/schemas/email.schema';
+import { nameFieldSchema } from '@/lib/schemas/name.schema';
 import React, { useState } from 'react';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
 import { ZodError } from 'zod';
 
-interface EmailInputProps extends Omit<TextInputProps, 'value' | 'onChangeText'> {
+interface NameInputProps extends Omit<TextInputProps, 'value' | 'onChangeText'> {
   value: string;
   onChangeText: (text: string) => void;
   label?: string;
@@ -13,26 +13,26 @@ interface EmailInputProps extends Omit<TextInputProps, 'value' | 'onChangeText'>
   onValidationChange?: (isValid: boolean, error?: string) => void;
 }
 
-const EmailInput = ({
+const NameInput = ({
   value,
   onChangeText,
-  label = 'Correo electrónico',
+  label = 'Nombre',
   error: externalError,
   validateOnBlur = true,
   validateOnChange = false,
   onValidationChange,
-  placeholder = 'ejemplo@correo.com',
+  placeholder = 'Tu nombre',
   className,
   ...textInputProps
-}: EmailInputProps) => {
+}: NameInputProps) => {
   const [internalError, setInternalError] = useState<string>('');
   const [touched, setTouched] = useState(false);
 
   const displayError = externalError || internalError;
 
-  const validateEmail = (email: string): boolean => {
+  const validateName = (name: string): boolean => {
     try {
-      emailFieldSchema.parse(email);
+      nameFieldSchema.parse(name);
       setInternalError('');
       onValidationChange?.(true);
       return true;
@@ -51,9 +51,8 @@ const EmailInput = ({
     
     if (validateOnChange) {
       setTouched(true);
-      validateEmail(text);
+      validateName(text);
     } else if (touched && internalError) {
-      // Limpiar error si el usuario está escribiendo después de haber tocado el campo
       setInternalError('');
     }
   };
@@ -61,7 +60,7 @@ const EmailInput = ({
   const handleBlur = () => {
     setTouched(true);
     if (validateOnBlur) {
-      validateEmail(value);
+      validateName(value);
     }
   };
 
@@ -69,7 +68,7 @@ const EmailInput = ({
   React.useEffect(() => {
     if (validateOnChange && value) {
       setTouched(true);
-      validateEmail(value);
+      validateName(value);
     }
   }, [validateOnChange]);
 
@@ -87,19 +86,18 @@ const EmailInput = ({
         onChangeText={handleChangeText}
         onBlur={handleBlur}
         placeholder={placeholder}
-        keyboardType="email-address"
-        autoCapitalize="none"
+        autoCapitalize="words"
         autoCorrect={false}
-        autoComplete="email"
+        autoComplete="name"
         className={`h-12 border rounded-lg px-4 text-base text-yellow-500 bg-black ${
           displayError && touched 
             ? 'border-red-500 border-2' 
             : 'border-gray-300'
         } ${className || ''}`}
-        placeholderTextColor="#9CA3AF"
+        placeholderTextColor={textInputProps.placeholderTextColor || "#9CA3AF"}
       />
       
-      {(
+      {displayError && touched && (
         <Text className="text-xs text-pink-200 mt-1 ml-1">
           {displayError}
         </Text>
@@ -108,4 +106,4 @@ const EmailInput = ({
   );
 };
 
-export default EmailInput;
+export default NameInput;

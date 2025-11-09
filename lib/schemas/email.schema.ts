@@ -1,5 +1,5 @@
+import { EMAIL_MESSAGES } from '@/lib/constants/error-messages';
 import { z } from 'zod';
-import { EMAIL_MESSAGES } from '../constants/error-messages';
 
 export const emailSchema = z.object({
   email: z
